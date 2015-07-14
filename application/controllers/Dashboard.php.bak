@@ -1,0 +1,51 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Dashboard extends CI_Controller {
+
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->load->model("Model", "model", FALSE, "dta_post");
+	}
+
+	public function index()
+	{
+		echo "<script type=\"text/javascript\" src=\"".base_url('assets/js/jquery-1.11.3.min.js')."\"></script>";
+		echo "<script type=\"text/javascript\" src=\"".base_url('assets/js/jquery.regex.js')."\"></script>";
+		echo "
+		<script>
+			var URL = \"".site_url('dashboard/toggleLike')."\";
+		</script>";
+		echo "<script type=\"text/javascript\" src=\"".base_url('assets/js/general.js')."\"></script>";
+		$likes = $this->model->get('dta_post_like');
+
+		foreach($likes as $row){
+			echo "<a href=\"#\" id=\"like-$row->id,$row->id_post,$row->id_user\">Like</a>";
+		}
+
+		var_dump($this->model->getPosts());
+	}
+
+	public function toggleLike($id = 0, $id_post, $user_id, $bool = 0){
+		if($bool == 0){
+			$res = $this->model->insert(array("id_post" => $id_post, "id_user" => $user_id, "datetime" => date("Y-m-d H:i:s")), "dta_post_like");
+			if($res){
+				echo "unlike-".$this->db->insert_id().",$id_post,$user_id\nUnlike";
+			}else{
+				echo "like-$id,$id_post,$user_id\nLike";
+			}
+		}else{
+			$res = $this->model->delete(array("id" => $id), "dta_post_like");
+			if($res){
+				echo "like-$id,$id_post,$user_id\nLike";
+			}else{
+				echo "unlike-$id,$id_post,$user_id\nUnlike";
+			}
+		}
+	}
+}
+
+/* End of file Dashboard.php */
+/* Location: ./application/controllers/Dashboard.php */

@@ -65,6 +65,17 @@ class MY_Model extends CI_Model {
 		}
 		return FALSE;
 	}
+
+	public function update($dataArgs, $table = NULL){
+		$table = $table === NULL ? $this->table : $table;
+
+		$res = $this->db->update($table, $dataArgs);
+		if($res){
+			return TRUE;
+		}
+		return FALSE;
+	}
+
 }
 
 /* End of file MY_Model.php */

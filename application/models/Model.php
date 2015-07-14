@@ -17,7 +17,7 @@ class Model extends MY_Model {
 				)
 			);
 
-		return $this->get_join($joins, "user, content, datetime");
+		return $this->get_join($joins, "user, content, datetime", NULL, "dta_post");
 	}
 }
 
