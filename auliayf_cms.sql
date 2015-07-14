@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2015 at 11:40 AM
+-- Generation Time: Jul 14, 2015 at 09:36 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.5.24
 
@@ -23,6 +23,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `app_menu`
+--
+
+CREATE TABLE IF NOT EXISTS `app_menu` (
+  `id` int(11) NOT NULL,
+  `id_parent` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(125) NOT NULL,
+  `target` varchar(125) NOT NULL,
+  `order` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `app_menu`
+--
+
+INSERT INTO `app_menu` (`id`, `id_parent`, `name`, `target`, `order`) VALUES
+(1, 0, 'Home', 'home', 1),
+(2, 0, 'About Us', 'about', 2),
+(3, 1, 'Child', 'tes', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `dta_post`
 --
 
@@ -31,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `dta_post` (
   `id_user` int(11) NOT NULL,
   `content` text NOT NULL,
   `datetime` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `dta_post`
@@ -65,7 +88,14 @@ CREATE TABLE IF NOT EXISTS `dta_post_like` (
   `id_post` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `datetime` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `dta_post_like`
+--
+
+INSERT INTO `dta_post_like` (`id`, `id_post`, `id_user`, `datetime`) VALUES
+(22, 1, 1, '2015-07-13 08:27:52');
 
 -- --------------------------------------------------------
 
@@ -89,6 +119,12 @@ INSERT INTO `dta_user` (`id`, `user`, `pass`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `app_menu`
+--
+ALTER TABLE `app_menu`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `dta_post`
@@ -119,10 +155,15 @@ ALTER TABLE `dta_user`
 --
 
 --
+-- AUTO_INCREMENT for table `app_menu`
+--
+ALTER TABLE `app_menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `dta_post`
 --
 ALTER TABLE `dta_post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `dta_post_comment`
 --
@@ -132,7 +173,7 @@ ALTER TABLE `dta_post_comment`
 -- AUTO_INCREMENT for table `dta_post_like`
 --
 ALTER TABLE `dta_post_like`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `dta_user`
 --
