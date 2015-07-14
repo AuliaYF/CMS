@@ -4,8 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class MY_Controller extends CI_Controller {
 	private $data = array();
 
-	protected function callView(){
-		$this->load->view('main', $this->data);
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('Model', 'model', FALSE, 'app_menu');
+	}
+	
+	protected function callView($data = NULL){
+		$data = $data === NULL ? $this->data : $data;
+		$this->load->view('main', $data);
 	}
 
 }

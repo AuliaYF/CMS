@@ -4,8 +4,8 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>">
-	<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
-	<script type="text/javascript" src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
+	<link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap-theme.min.css') ?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/css/dataTables.bootstrap.css') ?>">
 </head>
 <body>
 	<div class="container-fluid">
@@ -21,33 +21,43 @@
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 							</button>
-							<a class="navbar-brand" href="#">Brand</a>
+							<a class="navbar-brand" href="<?php echo site_url() ?>">Brand</a>
 						</div>
 
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-							<?php display_children(0, 0); ?>
-							<!-- <ul class="nav navbar-nav">
-								<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-								<li><a href="#">Link</a></li>
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-									<ul class="dropdown-menu">
-										<li><a href="#">Action</a></li>
-										<li><a href="#">Another action</a></li>
-										<li><a href="#">Something else here</a></li>
-										<li role="separator" class="divider"></li>
-										<li><a href="#">Separated link</a></li>
-										<li role="separator" class="divider"></li>
-										<li><a href="#">One more separated link</a></li>
-									</ul>
-								</li>
-							</ul> -->
+							<?php display_children(0, 0, (isset($menu_mode) ? $menu_mode : 2)); ?>
 						</div><!-- /.navbar-collapse -->
 					</div><!-- /.container-fluid -->
 				</nav>
 			</div>
+			<div class="row">
+				<?php getBreadcrumbs((isset($breadActive) ? $breadActive : NULL)); ?>
+			</div>
+			<div class="row">
+				<?php
+				if(isset($main_view)){
+					if(file_exists(APPPATH."views/".$main_view.".php")){
+						$this->load->view($main_view);
+					}else{
+						echo "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad perspiciatis sint doloremque magni doloribus, atque voluptatibus, ducimus illo dolore modi amet incidunt vero provident, rerum libero a eaque recusandae consectetur!";
+					}
+				}else{
+					echo "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad perspiciatis sint doloremque magni doloribus, atque voluptatibus, ducimus illo dolore modi amet incidunt vero provident, rerum libero a eaque recusandae consectetur!";
+				}
+				?>
+			</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.dataTables.min.js') ?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('assets/js/dataTables.bootstrap.js') ?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('assets/js/general.js') ?>"></script>
+	<?php
+	if(isset($main_view)){
+		echo "<script type=\"text/javascript\" src=\"".base_url('assets/js/view/'.explode("/", $main_view)[1].'.js')."\"></script>";
+	}
+	?>
 </body>
 </html>

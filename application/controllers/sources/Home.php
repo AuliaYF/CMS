@@ -8,6 +8,10 @@ class Home extends MY_Controller {
 		$this->callView();
 	}
 
+	public function edit(){
+		$data['breadActive'] = 'Informasi';
+		$this->callView($data);
+	}
 }
 
 /* End of file Home.php */

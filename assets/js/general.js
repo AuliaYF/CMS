@@ -18,6 +18,7 @@ $(document).ready(function() {
         
         this.id = newId;
     });
+    $('#dynTable').DataTable();
 });
 
 function getXMLHttp() {
